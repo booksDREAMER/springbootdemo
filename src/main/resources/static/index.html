@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工信息</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table-zh-CN.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid"  style="position: relative;top:10px" >
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="position: relative; left:5px;top:15px">添加记录</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 40px">
+    <table id="table"  class="table table-bordered" ></table>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center">新增员工</h4>
+            </div>
+            <form id = "insertform" action="#">
+                <div class="modal-body">
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="请输入姓名.....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="sex" class="col-sm-2 control-label">性别</label>
+                            <div class="col-sm-8">
+                                <select id="sex">
+                                    <option name="sex"value=0>请选择性别……</option>
+                                    <option name="sex"value=1>男</option>
+                                    <option name="sex"value=2>女</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="birthday" class="col-sm-2 control-label">生日</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="birthday" name="birthday" placeholder="请输入生日.....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="national" class="col-sm-2 control-label">国家</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="national" name="national" placeholder="请输入国家.....">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 control-label">地址</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="请输入地址.....">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="mobile" class="col-sm-2 control-label">手机号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="请输入手机号.....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="addRecord()" >提交</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal -->
+    </div>
+</div>
+<div class="modal fade" id="updateMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <input type="hidden" id="UuserId" value="0">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="UmyModalLabel" style="text-align: center">新增员工</h4>
+            </div>
+            <form id = "Uform" action="#">
+                <div class="modal-body">
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="Uusername" name="username" placeholder="请输入姓名.....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="sex" class="col-sm-2 control-label">性别</label>
+                            <div class="col-sm-8">
+                                <select id="Usex">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="birthday" class="col-sm-2 control-label">生日</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="Ubirthday" name="birthday" placeholder="请输入生日.....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="national" class="col-sm-2 control-label">国家</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="Unational" name="national" placeholder="请输入国家.....">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 control-label">地址</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="Uaddress" name="address" placeholder="请输入地址.....">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="mobile" class="col-sm-2 control-label">手机号</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="Umobile" name="mobile" placeholder="请输入手机号.....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="uEmployees()" >提交</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal -->
+    </div>
+</div>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+
+
+</html>

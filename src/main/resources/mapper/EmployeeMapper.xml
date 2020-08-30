@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo11.dao.EmployeeDAO">
+
+    <resultMap id="employeeMap" type="com.example.demo11.pojo.Employee">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="national" column="national"/>
+        <result property="address" column="address"/>
+        <result property="mobile" column="mobile"/>
+    </resultMap>
+
+    <!--通过ID查询单个-->
+    <select id="findById" resultMap="employeeMap">
+        SELECT user_id,username,sex,birthday,national,address,mobile FROM employee
+        WHERE user_id=#{id}
+    </select>
+
+    <!--全部查询-->
+    <select id="findList" resultMap="employeeMap">
+        SELECT user_id,username,sex,birthday,national,address,mobile FROM employee
+    </select>
+
+    <!--新增-->
+    <insert id="insert" parameterType="com.example.demo11.pojo.Employee">
+        INSERT INTO employee(user_id,username,sex,birthday,national,address,mobile)
+        VALUES (#{userId},#{username},#{sex},#{birthday},#{national},#{address},#{mobile})
+    </insert>
+
+    <!--修改-->
+    <update id="update">
+        UPDATE employee SET username=#{username},sex=#{sex},birthday=#{birthday},national=#{national},address=#{address},mobile=#{mobile}
+        WHERE user_id=#{userId}
+    </update>
+
+    <!--通过ID删除单个-->
+    <delete id="deleteById">
+        DELETE FROM employee WHERE user_id=#{id}
+    </delete>
+
+</mapper>
